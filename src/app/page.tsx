@@ -15,8 +15,9 @@ export default function Home() {
               Crea una orden
             </h1>
             <p className="text-sm text-[#7682A0]">
-              Dale una ventaja competitiva a tu negocio con entregas el mismo
-              día (Área Metropolitana) y el día siguiente a nivel nacional.
+              Dale una ventaja competitiva a tu negocio con entregas{" "}
+              <strong>el mismo día</strong> (Área Metropolitana) y{" "}
+              <strong>el día siguiente</strong> a nivel nacional.
             </p>
           </div>
           <Form />
