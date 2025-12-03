@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Components
 import { CreateOrdenGeneral } from "../CreateOrdenGeneral";
@@ -11,6 +12,12 @@ const Form = () => {
     names: "",
     lastnames: "",
     email: "",
+    phone: "",
+    recipientAddresses: "",
+    indications: "",
+    municipality: "",
+    department: "",
+    benchmark: "",
   });
 
   const [errors, setErrors] = useState({
@@ -19,6 +26,11 @@ const Form = () => {
     names: "",
     lastnames: "",
     email: "",
+    phone: "",
+    recipientAddresses: "",
+    indications: "",
+    department: "",
+    benchmark: "",
   });
 
   const [completedForm, setCompletedForm] = useState(false);
@@ -69,6 +81,33 @@ const Form = () => {
     return "";
   };
 
+  const validatePhone = (value) => {
+    if (!value) return "El número de teléfono es obligatorio";
+    const emailRegex = /^\d{6,14}$/;
+    if (!emailRegex.test(value)) return "Ingresa un número de teléfono válido";
+    return "";
+  };
+
+  const validateRecipientAddresses = (value) => {
+    if (!value) return "La dirección del destinatario es obligatorio";
+    if (value.length < 12) return "Debe tener al menos 12 caracteres";
+    return "";
+  };
+
+  const validateIndications = (value) => {
+    return "";
+  };
+
+  const validateDepartment = (value) => {
+    if (!value) return "El departamento es obligatorio";
+    return "";
+  };
+
+  const validateBenchmark = (value) => {
+    if (!value) return "El punto de referencia es obligatorio";
+    return "";
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -82,6 +121,12 @@ const Form = () => {
       else if (name === "names") error = validateNames(value);
       else if (name === "lastnames") error = validateLastnames(value);
       else if (name === "email") error = validateEmail(value);
+      else if (name === "phone") error = validatePhone(value);
+      else if (name === "recipientAddresses")
+        error = validateRecipientAddresses(value);
+      else if (name === "indications") error = validateIndications(value);
+      else if (name === "department") error = validateDepartment(value);
+      else if (name === "benchmark") error = validateBenchmark(value);
 
       setErrors((prev) => ({ ...prev, [name]: error }));
     }
@@ -98,6 +143,12 @@ const Form = () => {
     else if (name === "names") error = validateNames(value);
     else if (name === "lastnames") error = validateLastnames(value);
     else if (name === "email") error = validateEmail(value);
+    else if (name === "phone") error = validatePhone(value);
+    else if (name === "recipientAddresses")
+      error = validateRecipientAddresses(value);
+    else if (name === "indications") error = validateIndications(value);
+    else if (name === "department") error = validateDepartment(value);
+    else if (name === "benchmark") error = validateBenchmark(value);
 
     setErrors((prev) => ({ ...prev, [name]: error }));
   };
@@ -108,11 +159,21 @@ const Form = () => {
     !errors.names &&
     !errors.lastnames &&
     !errors.email &&
+    !errors.phone &&
+    !errors.recipientAddresses &&
+    !errors.indications &&
+    !errors.department &&
+    !errors.benchmark &&
     formData.collectionAddress &&
     formData.scheduledDate &&
     formData.names &&
     formData.lastnames &&
-    formData.email;
+    formData.email &&
+    formData.phone &&
+    formData.recipientAddresses &&
+    formData.indications &&
+    formData.department &&
+    formData.benchmark;
 
   const handleCompletedForm = () => setCompletedForm(!completedForm);
 
@@ -126,30 +187,73 @@ const Form = () => {
       names: validateNames(formData.names),
       lastnames: validateLastnames(formData.lastnames),
       email: validateEmail(formData.email),
+      phone: validateEmail(formData.phone),
+      recipientAddresses: validateRecipientAddresses(
+        formData.recipientAddresses
+      ),
+      indications: validateRecipientAddresses(formData.indications),
+      department: validateRecipientAddresses(formData.department),
+      benchmark: validateRecipientAddresses(formData.benchmark),
     };
 
     setErrors(newErrors);
 
-    // If valid, submit
     if (!Object.values(newErrors).some((err) => err)) {
       console.log("DATA:", formData);
     }
   };
 
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
   return (
     <form
       onSubmit={onSubmit}
-      className="bg-white rounded-md border border-[#E5E8EE] px-10 pt-16 pb-10"
+      className="bg-white rounded-md border border-[#E5E8EE] px-10 pt-16 pb-10 overflow-hidden"
     >
-      <CreateOrdenGeneral
-        formData={formData}
-        errors={errors}
-        touched={touched}
-        handleChange={handleChange}
-        handleBlur={handleBlur}
-        handleCompletedForm={handleCompletedForm}
-        isValid={isValid}
-      />
+      <AnimatePresence mode="wait">
+        {!completedForm ? (
+          <motion.div
+            key="step-1"
+            initial={{ opacity: 0, y: 20 }} // al iniciar
+            animate={{ opacity: 1, y: 0 }} // cuando se muestra
+            exit={{ opacity: 0, y: -20 }} // cuando se va
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            <CreateOrdenGeneral
+              formData={formData}
+              errors={errors}
+              touched={touched}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              handleCompletedForm={handleCompletedForm}
+              isValid={isValid}
+              setFormData={setFormData}
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="step-2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            <h1 className="text-2xl font-bold mb-4">Formulario completado</h1>
+            <p>Puedes continuar con el siguiente paso.</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </form>
   );
 };
