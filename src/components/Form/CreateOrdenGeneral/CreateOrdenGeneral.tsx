@@ -21,9 +21,9 @@ const CreateOrdenGeneral = ({
 
   return (
     <div className="space-y-4 w-full">
-      <div className="grid grid-cols-5 grid-rows-5 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 grid-rows-auto md:grid-rows-auto lg:grid-rows-5 gap-4 md:gap-6 lg:gap-8">
         {/* Dirección de recolección */}
-        <div className="col-start-1 col-end-4 row-start-1 row-end-2 flex flex-col gap-2">
+        <div className="col-span-1 md:col-span-2 lg:col-start-1 lg:col-end-4 lg:row-start-1 lg:row-end-2 flex flex-col gap-2">
           <label className="block mb-1 text-sm font-semibold text-[#7682A0]">
             📍 Dirección de recolección
           </label>
@@ -49,7 +49,7 @@ const CreateOrdenGeneral = ({
         </div>
 
         {/* Fecha Programada */}
-        <div className="col-start-4 col-end-6 row-start-1 row-end-2 flex flex-col gap-2">
+        <div className="col-span-1 md:col-span-2 lg:col-start-4 lg:col-end-6 lg:row-start-1 lg:row-end-2 flex flex-col gap-2">
           <label className="block mb-1 text-sm font-semibold text-[#7682A0]">
             📅 Fecha Programada
           </label>
@@ -82,7 +82,7 @@ const CreateOrdenGeneral = ({
         </div>
 
         {/* Nombres */}
-        <div className="col-start-1 col-end-3 row-start-2 row-end-3 flex flex-col gap-2">
+        <div className="col-span-1 md:col-span-1 lg:col-start-1 lg:col-end-3 lg:row-start-2 lg:row-end-3 flex flex-col gap-2">
           <label className="block mb-1 text-sm font-semibold text-[#7682A0]">
             Nombres
           </label>
@@ -107,7 +107,7 @@ const CreateOrdenGeneral = ({
         </div>
 
         {/* Apellidos */}
-        <div className="col-start-3 col-end-4 row-start-2 row-end-3 flex flex-col gap-2">
+        <div className="col-span-1 md:col-span-1 lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-3 flex flex-col gap-2">
           <label className="block mb-1 text-sm font-semibold text-[#7682A0]">
             Apellidos
           </label>
@@ -132,7 +132,7 @@ const CreateOrdenGeneral = ({
         </div>
 
         {/* Correo electronico */}
-        <div className="col-start-4 col-end-6 row-start-2 row-end-3 flex flex-col gap-2">
+        <div className="col-span-1 md:col-span-2 lg:col-start-4 lg:col-end-6 lg:row-start-2 lg:row-end-3 flex flex-col gap-2">
           <label className="block mb-1 text-sm font-semibold text-[#7682A0]">
             Correo Electrónico
           </label>
@@ -157,7 +157,7 @@ const CreateOrdenGeneral = ({
         </div>
 
         {/* Telefono */}
-        <div className="col-start-1 col-end-3 row-start-3 row-end-4 flex flex-col gap-2">
+        <div className="col-span-1 md:col-span-1 lg:col-start-1 lg:col-end-3 lg:row-start-3 lg:row-end-4 flex flex-col gap-2">
           <CountryPhoneInput
             name="phone"
             value={formData.phone}
@@ -170,7 +170,7 @@ const CreateOrdenGeneral = ({
         </div>
 
         {/* Dirección del destinatario */}
-        <div className="col-start-3 col-end-6 row-start-3 row-end-3 flex flex-col gap-2">
+        <div className="col-span-1 md:col-span-1 lg:col-start-3 lg:col-end-6 lg:row-start-3 lg:row-end-3 flex flex-col gap-2">
           <label className="block mb-1 text-sm font-semibold text-[#7682A0]">
             Dirección del destinatario
           </label>
@@ -197,7 +197,7 @@ const CreateOrdenGeneral = ({
         </div>
 
         {/* Departamento */}
-        <div className="col-start-1 col-end-2 row-start-4 row-end-4 flex flex-col gap-2">
+        <div className="col-span-1 md:col-span-1 lg:col-start-1 lg:col-end-2 lg:row-start-4 lg:row-end-4 flex flex-col gap-2">
           <label className="block mb-1 text-sm font-semibold text-[#7682A0]">
             Departamento
           </label>
@@ -228,7 +228,7 @@ const CreateOrdenGeneral = ({
         </div>
 
         {/* Municipio */}
-        <div className="col-start-2 col-end-4 row-start-4 row-end-4 flex flex-col gap-2">
+        <div className="col-span-1 md:col-span-1 lg:col-start-2 lg:col-end-4 lg:row-start-4 lg:row-end-4 flex flex-col gap-2">
           <label className="block mb-1 text-sm font-semibold text-[#7682A0]">
             Municipio
           </label>
@@ -262,7 +262,7 @@ const CreateOrdenGeneral = ({
         </div>
 
         {/* Punto de referencia */}
-        <div className="col-start-4 col-end-6 row-start-4 row-end-4 flex flex-col gap-2">
+        <div className="col-span-1 md:col-span-2 lg:col-start-4 lg:col-end-6 lg:row-start-4 lg:row-end-4 flex flex-col gap-2">
           <label className="block mb-1 text-sm font-semibold text-[#7682A0]">
             Punto de Referencia
           </label>
@@ -287,7 +287,7 @@ const CreateOrdenGeneral = ({
         </div>
 
         {/* Indicaciones */}
-        <div className="col-start-1 col-end-6 row-start-5 row-end-5 flex flex-col gap-2">
+        <div className="col-span-1 md:col-span-2 lg:col-start-1 lg:col-end-6 lg:row-start-5 lg:row-end-5 flex flex-col gap-2">
           <label className="block mb-1 text-sm font-semibold text-[#7682A0]">
             Indicaciones
           </label>
