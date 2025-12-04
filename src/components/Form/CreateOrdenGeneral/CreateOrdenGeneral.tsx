@@ -317,13 +317,14 @@ const CreateOrdenGeneral = ({
           onClick={handleCompletedForm}
           type="button"
           disabled={!isValid}
-          className={`mt-6 text-white px-6 py-5 rounded-md flex items-center justify-end gap-4 text-lg ${
+          className={`mt-6 px-6 py-3 rounded-md flex items-center justify-end gap-4 text-lg ${
             isValid
-              ? "bg-[#2F5CDF] cursor-pointer"
-              : "bg-gray-400 cursor-not-allowed"
+              ? "bg-[#2F5CDF] cursor-pointer text-white"
+              : "bg-[#E1E4EC] border-2 border-gray-300 cursor-not-allowed text-[#7682A0]"
           }`}
         >
-          Siguiente <ArrowRight size={20} color="#fff" />
+          Siguiente{" "}
+          <ArrowRight size={20} color={`${isValid ? "#fff" : "#7682A0"}`} />
         </button>
       </div>
     </div>
