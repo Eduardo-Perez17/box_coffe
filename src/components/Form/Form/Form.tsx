@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "sonner";
@@ -8,6 +8,8 @@ import { toast } from "sonner";
 import { CreateOrdenGeneral, FormProduct } from "../";
 
 const Form = () => {
+  const beforeUnloadRef = useRef(null);
+
   const [formData, setFormData] = useState({
     collectionAddress: "",
     scheduledDate: "",
@@ -72,7 +74,7 @@ const Form = () => {
     }
     return [];
   });
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
 
   const validateCollectionAddress = (value) => {
     if (!value) return "La dirección de recolección es obligatoria";
@@ -342,12 +344,21 @@ const Form = () => {
     });
   };
 
+  const hardReload = () => {
+    if (beforeUnloadRef.current) {
+      window.removeEventListener("beforeunload", beforeUnloadRef.current);
+    }
+
+    sessionStorage.clear();
+    window.location.reload();
+  };
+
   const onsubmit = () => {
-    setLoader(true)
+    setLoader(true);
     const myPromise = new Promise<{ name: string }>((resolve) => {
       setTimeout(() => {
         resolve({ name: "My toast" });
-      }, 3000);
+      }, 2000);
     });
 
     toast.promise(myPromise, {
@@ -362,7 +373,10 @@ const Form = () => {
       error: "Error",
     });
 
-    setLoader(false)
+    setTimeout(() => {
+      setLoader(false);
+      hardReload();
+    }, 5000);
   };
 
   useEffect(() => {
@@ -370,6 +384,8 @@ const Form = () => {
       e.preventDefault();
       e.returnValue = "";
     };
+
+    beforeUnloadRef.current = handleBeforeUnload;
 
     window.addEventListener("beforeunload", handleBeforeUnload);
 

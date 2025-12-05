@@ -1,32 +1,8 @@
 // Components
-import { Metadata } from "next";
 import { Grid, Header, Footer } from "@/components";
 
 // Components form
 import { Form } from "@/components/Form";
-
-export const metadata: Metadata = {
-  title: "Envía tus paquetes fácil y rápido | MiAppEnvios",
-  description:
-    "Completa un formulario sencillo para enviar paquetes, documentos y productos. Ingresa direcciones, información básica del remitente y destinatario, y gestiona tus envíos de forma rápida y segura.",
-  keywords: [
-    "envíos",
-    "paquetes",
-    "formularios de envío",
-    "delivery",
-    "logística",
-    "envío de dirección",
-    "envío rápido",
-  ],
-  openGraph: {
-    title: "Envía tus paquetes fácil y rápido",
-    description:
-      "Formulario simple para gestionar envíos: direcciones, información básica y detalles del paquete.",
-    url: "",
-    siteName: "MiAppEnvios",
-    type: "website",
-  },
-};
 
 export default function Home() {
   return (
